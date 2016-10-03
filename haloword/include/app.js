@@ -120,15 +120,8 @@ function refresh_wordlist_trigger() {
 
 /* VERSION */
 
-var VERSION = get_version();
-
-function get_version() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', chrome.extension.getURL('manifest.json'), false);
-    xhr.send(null);
-    var manifest = JSON.parse(xhr.responseText);
-    return manifest.version;
-}
+var VERSION = require('electron').remote.app.getVersion();
+console.log(VERSION);
 
 /* UI */
 
@@ -447,6 +440,5 @@ function show_builtin(builtin) {
 }
 
 function process_builtin(data) {
-    data = data.replace(/__VERSION__/g, '<a href="#halo:version">' + VERSION + '</a>');
     return data;
 }
